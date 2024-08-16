@@ -16,7 +16,6 @@ function BlogSnippet() {
         try{
           await client.getEntries()
           .then((entries) =>{
-            console.log(entries)
             setBlogPost(entries)
           })
         }catch(error){
