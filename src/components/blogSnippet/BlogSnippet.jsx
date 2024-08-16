@@ -1,58 +1,55 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import data from "../data.json";
+import {createClient} from 'contentful'
 import { LuAlarmClock } from "react-icons/lu";
-import blogImage from "../../assets/blog1.png";
 
-const truncateText = (text, length) => {
-  if (text.length <= length) return text;
-  return text.substring(0, length) + "...";
-};
 
 function BlogSnippet() {
-  const [blog, setBlog] = useState([]);
-  const [expanded, setExpanded] = useState({});
+  const [blogPost, setBlogPost] = useState([])
+  const spaceID = import.meta.env.VITE_SPACE_ID
+  const accessTokenID = import.meta.env.VITE_CDA_TOKEN
 
-  useEffect(() => {
-    fetch("./data.json")
-      .then((res) => res.json())
-      .then((data) => setBlog(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  const client = createClient({space: spaceID, accessToken:accessTokenID})
 
-  const toggleExpand = (id) => {
-    setExpanded((prevState) => ({ ...prevState, [id]: !prevState[id] }));
-  };
+  useEffect(() =>{
+      const getAllEntries = async () =>{
+        try{
+          await client.getEntries()
+          .then((entries) =>{
+            console.log(entries)
+            setBlogPost(entries)
+          })
+        }catch(error){
+          console.log(error)
+        }
+      }
+      getAllEntries()
+  }, [])
 
   return (
     <div className="blogContainer">
-      {blog.map((item, index) => (
-        <div className="blog-page" key={item.id}>
+      {blogPost?.items?.map((post) => (
+        <div className="blog-page" key={post.sys.id}>
           <div className="blog-details">
             <h1 className="blog-title">
-              {item.blogname}
+              {post.fields.blogTitle}
             </h1>
             <div className="blog-writer-details">
-              <div className="blog-date" key={item.id}>
+              <div className="blog-date">
                 <LuAlarmClock />
-                <p>{item.date}</p>
+                <p>{post.fields.createdAt}</p>
               </div>
-              <p className="writer-name">{item.writer}</p>
+              <p className="writer-name">{post.fields.blogAuthor}</p>
             </div>
 
-            <Link to={`/blogs/${item.id}`}>
+            <Link to={`/blogs/${post.sys.id}`}>
             <div className="blog-snippet-image">
-              {item.image && <img src={item.image} alt={item.blogname} />}
+              { post.fields.blogImage.fields.file.url&& <img src={ post.fields.blogImage.fields.file.url} alt={post.fields.blogTitle} />}
             </div>
 
             <div className="blog-content">
-              {/* <p className="blog-paragraph">{item.snippet}</p> */}
               <p className="blog-paragraph">
-                {expanded[item.id]
-                  ? item.snippet
-                  : truncateText(item.snippet, 400)}
-
-                
+                {post.fields.blogSnippet}
               </p>
             </div>
 
