@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import {createClient} from 'contentful'
 import { LuAlarmClock } from "react-icons/lu";
+import Loader from "../components/loader/Loading";
+
 
 function BlogFullDetails() {
 
@@ -11,6 +13,8 @@ function BlogFullDetails() {
   const client = createClient({space: spaceID, accessToken:accessTokenID})
   const {id} = useParams()
   const [singlePost , setSinglePost] = useState([])
+  const [loading , setLoading]= useState(true)
+
 
   useEffect(() =>{
         const getEntryById = async () =>{
@@ -18,6 +22,7 @@ function BlogFullDetails() {
             await client.getEntry(id)
             .then((entry) =>{
               setSinglePost(entry)
+              setLoading(false)
             })
             }catch(err){
             console.log(err)
@@ -26,7 +31,10 @@ function BlogFullDetails() {
         getEntryById()
   },[])
 
-console.log(singlePost)
+
+if (loading) {
+  return <Loader/>;
+}
   return (
     <>
       <Navbar />

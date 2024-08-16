@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {createClient} from 'contentful'
 import { LuAlarmClock } from "react-icons/lu";
+import Loader from "../loader/Loading";
 
 
 function BlogSnippet() {
   const [blogPost, setBlogPost] = useState([])
+  const [loading , setLoading]= useState(true)
   const spaceID = import.meta.env.VITE_SPACE_ID
   const accessTokenID = import.meta.env.VITE_CDA_TOKEN
 
   const client = createClient({space: spaceID, accessToken:accessTokenID})
+  
+  // convert date to dateString
+  const convertDate = (str) => {
+    let date = new Date(str);
+    return date.toDateString()
+  }
 
   useEffect(() =>{
       const getAllEntries = async () =>{
@@ -17,6 +25,7 @@ function BlogSnippet() {
           await client.getEntries()
           .then((entries) =>{
             setBlogPost(entries)
+            setLoading(false)
           })
         }catch(error){
           console.log(error)
@@ -24,7 +33,9 @@ function BlogSnippet() {
       }
       getAllEntries()
   }, [])
-
+  if (loading) {
+    return <Loader/>;
+  }
   return (
     <div className="blogContainer">
       {blogPost?.items?.map((post) => (
@@ -36,9 +47,10 @@ function BlogSnippet() {
             <div className="blog-writer-details">
               <div className="blog-date">
                 <LuAlarmClock />
-                <p>{post.fields.createdAt}</p>
+                <p>{convertDate(post.fields.createdAt)}</p>
               </div>
-              <p className="writer-name">{post.fields.blogAuthor}</p>
+              <span>.</span>
+              <p className="writer-name"> {post.fields.blogAuthor}</p>
             </div>
 
             <Link to={`/blogs/${post.sys.id}`}>
