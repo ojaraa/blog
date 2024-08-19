@@ -4,6 +4,23 @@ import Navbar from "../components/navbar/Navbar";
 import {createClient} from 'contentful'
 import { LuAlarmClock } from "react-icons/lu";
 import Loader from "../components/loader/Loading";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+import ReactMarkdown from 'react-markdown';
+
+
+
+
+const options = {
+  renderMark: {
+    [MARKS.BOLD]: (text) => <strong>{text}</strong>,
+  },
+  renderNode: {
+    [BLOCKS.UL_LIST]: (node, children) => <ul>{children}</ul>,
+    [BLOCKS.OL_LIST]: (node, children) => <ol>{children}</ol>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
+  },
+};
 
 
 function BlogFullDetails() {
@@ -14,6 +31,9 @@ function BlogFullDetails() {
   const {id} = useParams()
   const [singlePost , setSinglePost] = useState([])
   const [loading , setLoading]= useState(true)
+
+  // const content = singlePost?.fields?.blogDetails ;
+
 
 
   useEffect(() =>{
@@ -28,10 +48,10 @@ function BlogFullDetails() {
             console.log(err)
           }
         }
-        getEntryById()
+        getEntryById();
   },[])
 
-
+  console.log(singlePost?.fields?.blogDetails)
 if (loading) {
   return <Loader/>;
 }
@@ -57,7 +77,9 @@ if (loading) {
 
             <div className="blog-content">
               <p className="blog-paragraph">
-               {singlePost?.fields?.blogDetails}
+             
+               <ReactMarkdown>{singlePost?.fields?.blogDetails}</ReactMarkdown>
+               
               </p>
 
 

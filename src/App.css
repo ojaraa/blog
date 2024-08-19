@@ -79,6 +79,18 @@ a{
 .blog-paragraph{
   margin: 2rem 0;
 }
+.blog-paragraph ol,.blog-paragraph ul{
+  margin: 1rem 2rem;
+}
+.blog-paragraph li{
+  margin: 1rem 0;
+}
+.blog-paragraph h1, .blog-paragraph h2, .blog-paragraph h3{
+  margin-bottom: .7rem;
+}
+.blog-paragraph p{
+  margin-bottom: 1rem;
+}
 .sub-title{
   font-size: 1.7rem; 
   font-weight: 500;
@@ -117,6 +129,11 @@ footer{
   font-family: "Abhaya Libre", serif;
   color: rgb(68, 66, 66);
   font-size: 5rem;
+}
+.reactMarkDown ul li {
+  margin-left: 2em;
+  display: list-item;
+  text-align: -webkit-match-parent;
 }
 @media (max-width: 640px){
   footer{
