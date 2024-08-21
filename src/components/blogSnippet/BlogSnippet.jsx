@@ -47,20 +47,20 @@ function BlogSnippet() {
             <div className="blog-writer-details">
               <div className="blog-date">
                 <LuAlarmClock />
-                <p>{convertDate(post.fields.createdAt)}</p>
+                <p>{convertDate(post?.fields?.createdAt)}</p>
               </div>
               <span>.</span>
-              <p className="writer-name"> {post.fields.blogAuthor}</p>
+              <p className="writer-name"> {post?.fields?.blogAuthor}</p>
             </div>
 
             <Link to={`/blogs/${post.sys.id}`}>
             <div className="blog-snippet-image">
-              { post.fields.blogImage.fields.file.url&& <img src={ post.fields.blogImage.fields.file.url} alt={post.fields.blogTitle} />}
+              { post?.fields?.blogImage?.fields?.file?.url&& <img src={post?.fields?.blogImage?.fields?.file?.url} alt={post.fields.blogTitle} />}
             </div>
 
             <div className="blog-content">
               <p className="blog-paragraph">
-                {post.fields.blogSnippet}
+                {post?.fields?.blogSnippet}
               </p>
             </div>
 
