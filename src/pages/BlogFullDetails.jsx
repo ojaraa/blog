@@ -8,21 +8,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import ReactMarkdown from 'react-markdown';
 
-
-
-
-const options = {
-  renderMark: {
-    [MARKS.BOLD]: (text) => <strong>{text}</strong>,
-  },
-  renderNode: {
-    [BLOCKS.UL_LIST]: (node, children) => <ul>{children}</ul>,
-    [BLOCKS.OL_LIST]: (node, children) => <ol>{children}</ol>,
-    [BLOCKS.LIST_ITEM]: (node, children) => <li>{children}</li>,
-  },
-};
-
-
 function BlogFullDetails() {
 
   const spaceID = import.meta.env.VITE_SPACE_ID
@@ -31,10 +16,6 @@ function BlogFullDetails() {
   const {id} = useParams()
   const [singlePost , setSinglePost] = useState([])
   const [loading , setLoading]= useState(true)
-
-  // const content = singlePost?.fields?.blogDetails ;
-
-
 
   useEffect(() =>{
         const getEntryById = async () =>{
@@ -62,6 +43,12 @@ if (loading) {
         <div className="blog-page">
           <div className="blog-details">
            
+          
+
+            <div className="blog-image">
+              <img src={singlePost?.fields?.blogImage?.fields?.file?.url} alt="" />
+            </div>
+
             <h1 className="blog-title">{singlePost?.fields?.blogTitle}</h1>
             <div className="blog-writer-details">
             <div className="blog-date">
@@ -69,10 +56,6 @@ if (loading) {
               <p>{singlePost?.fields?.createdAt}</p>
             </div>
               <p className="writer-name">{singlePost?.fields?.blogAuthor}</p>
-            </div>
-
-            <div className="blog-image">
-              <img src={singlePost?.fields?.blogImage?.fields?.file?.url} alt="" />
             </div>
 
             <div className="blog-content">
