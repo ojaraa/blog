@@ -25,7 +25,9 @@ function Navbar() {
           <ul className={menuOpen ? "#navbar active" : "#navbar"} id="navbar">
             <li>Categories</li>
             <Link to={`/discover`}><li>Discover</li></Link>
-            <li>Contact</li>
+            <Link to={`/discovebbr`}><li>Contact</li></Link>
+
+            {/* <li></li> */}
           </ul>
         </nav>
 

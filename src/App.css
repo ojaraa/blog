@@ -134,6 +134,35 @@ footer{
   display: list-item;
   text-align: -webkit-match-parent;
 }
+.error-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+  width: 55%;
+  margin: 1rem auto 2rem auto;
+  text-align: center;
+}
+.error-page h1{
+  margin-bottom: 1rem;
+  font-size: 3rem;
+}
+.back-btn{
+  background-color: #383839;
+  color: #fff;
+  padding: .8rem 2rem;
+  border-radius: 5px;
+}
+.bac-btn-con{
+  margin: 2rem 0;
+}
+.error-img-con{
+  width: 500px;
+}
+.error-img-con img{
+  width: 100%;
+}
 @media (max-width: 640px){
   footer{
     position: static;
@@ -160,6 +189,15 @@ footer{
 .blog-image img{
   width: 100%;
   height: 280px;
+}.error-page{
+  width: 100%;
+  padding: 0 2rem;
+}
+.error-page h1{
+  font-size: 2rem;
+}
+.error-img-con{
+  width: 300px;
 }
 
 }

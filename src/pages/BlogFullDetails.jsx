@@ -7,7 +7,7 @@ import Loader from "../components/loader/Loading";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import ReactMarkdown from 'react-markdown';
-
+import Footer from '../components/Footer'
 function BlogFullDetails() {
 
   const spaceID = import.meta.env.VITE_SPACE_ID
@@ -69,6 +69,7 @@ if (loading) {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
