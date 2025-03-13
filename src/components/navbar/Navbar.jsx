@@ -16,7 +16,6 @@ function Navbar() {
       <header>
         <Link to={`/`}>
           <div className="logo">
-            {/* <GiBigWave className="logo-icon" /> */}
             <GiAbstract020 className="logo-icon" />
             <h1>Nova</h1>
           </div>
@@ -26,8 +25,6 @@ function Navbar() {
             <li>Categories</li>
             <Link to={`/discover`}><li>Discover</li></Link>
             <Link to={`/discovebbr`}><li>Contact</li></Link>
-
-            {/* <li></li> */}
           </ul>
         </nav>
 

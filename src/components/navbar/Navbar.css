@@ -11,20 +11,6 @@ header {
   margin: 0 auto;
   background: linear-gradient(180deg, #ffffff 0%, rgba(140, 148, 172, 0) 100%);
 }
-
-/* nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 2.5rem 2rem;
-    width: 100%;
-    margin: 0 auto;
-    background: linear-gradient(180deg, #FFFFFF 0%, rgba(140, 148, 172, 0) 100%);
-} */
 .logo {
   display: flex;
   align-items: center;
@@ -80,6 +66,7 @@ header {
   }
   .iconn {
     font-size: 2rem;
+    cursor: pointer;
     color: #000;
   }
   #navbar.active {
